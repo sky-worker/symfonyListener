@@ -1,0 +1,21 @@
+parameters:
+    locale: 'fr'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,,Kernel.php}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+    
+    App\EventListener\BienvenueListener:
+        tags:
+                - { name: 'kernel.event_listener', event: 'bienvenue.utilisateur', method: 'updateResponse' }
+    
