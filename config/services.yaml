@@ -17,5 +17,5 @@ services:
     
     App\EventListener\BienvenueListener:
         tags:
-                - { name: 'kernel.event_listener', event: 'bienvenue.utilisateur', method: 'updateResponse' }
+                - { name: 'kernel.event_subscriber', event: 'bienvenue.utilisateur' }
     
