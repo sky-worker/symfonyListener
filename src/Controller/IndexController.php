@@ -49,16 +49,13 @@ class IndexController extends AbstractController
         // Creating the dispatcher
         $eventDispatcher = new EventDispatcher();
         // Creating the event
-        $event = new BienvenueUtilisateur($name, $response);
-        // Creating the listener
-        //$listener = new BienvenueListener();
-        // Adding the litener to the config of the dispatcher
-        //$eventDispatcher->addListener( BienvenueUtilisateur::NAME, array($listener, 'updateResponse'));
+        $event = new BienvenueUtilisateur($name, $response, $eventDispatcher);
+
         // Sending the event
         $eventDispatcher->dispatch(BienvenueUtilisateur::NAME, $event);
         // Sending the response
-        return $this->render('htmlSkeleton.html.twig', ['message' => "<h1>Hello " . ucfirst($name) . "</h1>"]);
-        //return $response;
+        //return $this->render('htmlSkeleton.html.twig', ['message' => "<h1>Hello " . ucfirst($name) . "</h1>"]);
+        return $event->getResponse();
     }
    
 

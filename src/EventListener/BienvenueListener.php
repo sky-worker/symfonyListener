@@ -4,6 +4,7 @@
 namespace App\EventListener;
 
 use App\Events\BienvenueUtilisateur;
+use http\Env\Response;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class BienvenueListener
@@ -11,6 +12,13 @@ class BienvenueListener
 
     public function updateResponse(BienvenueUtilisateur $event)
     {
-        die('Yeah !');
+
+
+        $response = $event->getResponse();
+
+        $response->setContent( str_replace('</h1>', ".</h1> Bienvenue parmi nous " . $event->getName() . "!", $response->getContent()  ) );
+
+        $event->setResponse($response);
+
     }
 }
